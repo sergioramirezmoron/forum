@@ -27,8 +27,8 @@ if (isset($_POST["registerSubmit"])) {
             exit;
         }
     }
-        require_once('views/registerView.phtml');
-        exit;
+    require_once('views/registerView.phtml');
+    exit;
 }
 
 
