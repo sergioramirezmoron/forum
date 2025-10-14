@@ -13,13 +13,20 @@
     if ($_SESSION['user']) {
     ?>
         <h3>Nombre: <?php echo $_SESSION['user']->getUsername(); ?></h3>
-        <h3>Rol: <?php echo $_SESSION['user']->getRol(); ?></h3>
+        <h3>Rol: <?php if ($_SESSION['user']->getRol()) {
+                    ?>
+                Admin
+            <?php
+                    } else {
+            ?>
+                Usuario
+            <?php
+                    } ?></h3>
     <?php
     }
     ?>
 
     <a href="index.php">Volver</a>
-    <a href="index.php?c=user&logout=1">Cerrar Sesión</a>
 </body>
 
 </html>
