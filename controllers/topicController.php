@@ -30,6 +30,6 @@ if (!isset($_GET['id'])) {
     require_once 'views/mainView.phtml';
 } else {
     $topic = TopicRepository::getTopicById($_GET["id"]);
-    $comments = CommentRepository::getCommentsByPostId($_GET["id"]);
+    $comments = $topic->getComments($_GET["id"]);
     require_once 'views/topicView.phtml';
 }

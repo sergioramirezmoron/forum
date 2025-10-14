@@ -13,6 +13,7 @@
     if ($_SESSION['user']) {
     ?>
         <h3>Nombre: <?php echo $_SESSION['user']->getUsername(); ?></h3>
+        <h3>Rol: <?php echo $_SESSION['user']->getRol(); ?></h3>
     <?php
     }
     ?>

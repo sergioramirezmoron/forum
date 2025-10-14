@@ -39,4 +39,8 @@ class Topic
     {
         return UserRepository::getUserById($this->idAuthor);
     }
+    public function getComments()
+    {
+        return CommentRepository::getCommentsByPostId($_GET["id"]);
+    }
 }
