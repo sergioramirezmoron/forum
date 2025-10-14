@@ -15,7 +15,7 @@
     } else {
         echo "<h1>" . $topic->getTitle() . "</h1>";
         echo $topic->getDescription() . "<br>";
-        echo "Escrito por: <strong>" . $topic->getIdAuthor()->getUsername() . "</strong>  el <strong>" . date('d/m/Y', strtotime($topic->getDate())) . "</strong><br>";
+        echo "Escrito por: <strong>" . $topic->getIdAuthor()->getUsername() . "</strong>  el <strong>" . $topic->getDate() . "</strong><br>";
         echo "<br>";
 
     ?>
@@ -24,6 +24,7 @@
 
             <input type="submit" value="Enviar comentario" name="addComment">
         </form><br>
+        <a href="index.php">Volver</a><br>
     <?php
         echo "COMENTARIOS: <br><br>";
 
@@ -36,7 +37,6 @@
     }
 
     ?>
-    <a href="index.php">Volver</a><br>
 
 </body>
 

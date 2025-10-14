@@ -15,7 +15,7 @@ class TopicRepository
     public static function getTopics()
     {
         $db = Connection::connect();
-        $q = "SELECT * FROM topics";
+        $q = "SELECT * FROM topics ORDER BY date DESC";
         $result = $db->query($q);
         $topics = array();
         while ($row = $result->fetch_assoc()) {
