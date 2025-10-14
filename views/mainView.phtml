@@ -15,7 +15,7 @@
     <?php
 
     foreach ($topics as $topic) {
-        if ($_SESSION["user"]->getRol()) {
+        if ($_SESSION["user"]->getRol() || $topic->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
             echo "<a href='index.php?c=topic&delete=" . $topic->getId() . "'>X</a> | ";
         }
         echo "<a href='index.php?c=topic&id=" . $topic->getId() . "'>" . $topic->getTitle() . "<br>";

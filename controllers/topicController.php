@@ -3,9 +3,12 @@ include_once("helpers/FileHelper.php");
 
 // Delete
 if (isset($_GET["delete"])) {
-    if (TopicRepository::deleteTopic($_GET["delete"])) {
-        header("Location: index.php");
-        exit();
+    $topicToDelete = TopicRepository::getTopicById($_GET["delete"]);
+    if ($topicToDelete && ($_SESSION["user"]->getRol()) || ($topicToDelete->getIdAuthor()->getId() == $_SESSION["user"]->getId())) {
+        if (TopicRepository::deleteTopic($_GET["delete"])) {
+            header("Location: index.php");
+            exit();
+        }
     }
 }
 

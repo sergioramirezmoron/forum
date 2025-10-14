@@ -1,10 +1,13 @@
 <?php
 
 //Delete
-if (isset($_GET["delete"]) && $_SESSION["user"]->getRol()) {
-    if (CommentRepository::deleteComment($_GET["delete"])) {
-        header("Location: index.php?c=topic&id=" . $_GET["post_id"]);
-        exit();
+if (isset($_GET["delete"])) {
+    $commentToDelete = CommentRepository::getCommentById($_GET["delete"]);
+    if ($commentToDelete && ($_SESSION["user"]->getRol() || $commentToDelete->getIdAuthor()->getId() == $_SESSION["user"]->getId())) {
+        if (CommentRepository::deleteComment($_GET["delete"])) {
+            header("Location: index.php?c=topic&id=" . $_GET["post_id"]);
+            exit();
+        }
     }
 }
 

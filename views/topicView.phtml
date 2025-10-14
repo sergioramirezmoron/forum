@@ -29,7 +29,7 @@
         echo "COMENTARIOS: <br><br>";
 
         foreach ($comments as $comment) {
-            if ($_SESSION["user"]->getRol()) {
+            if ($_SESSION["user"]->getRol() || $comment->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
                 echo "<a href='index.php?c=comment&delete=" . $comment->getId() . "&post_id=" . $topic->getId() . "'>X</a> ";
             }
             echo $comment->getDate() . " - <strong>" . $comment->getIdAuthor()->getUsername() . "</strong>: " . $comment->getContent() . "<br>";

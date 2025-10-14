@@ -21,6 +21,17 @@ class CommentRepository
         return false;
     }
 
+    public static function getCommentById($id)
+    {
+        $db = Connection::connect();
+        $q = "SELECT * FROM comments WHERE id = " . $id;
+        $result = $db->query($q);
+        if ($row = $result->fetch_assoc()) {
+            return new Comment($row['id'], $row['content'], $row['date'], $row['id_author'], $row['id_post']);
+        }
+        return false;
+    }
+
     public static function getCommentsByPostId($idPost)
     {
         $db = Connection::connect();
