@@ -6,6 +6,12 @@ if (isset($_GET['logout'])) {
     header('location:index.php');
 }
 
+//profile
+if (isset($_GET['profile'])) {
+    require_once('views/profileView.phtml');
+    exit;
+}
+
 //Register
 if (isset($_GET['register'])) {
     require_once('views/registerView.phtml');

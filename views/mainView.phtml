@@ -9,12 +9,7 @@
 </head>
 
 <body>
-    <?php
-
-    if ($_SESSION['user']) {
-        echo 'Hola ' . $_SESSION['user']->getUsername() . '. <a href="index.php?c=user&logout=1">Cerrar Sesión</a><br><br>';
-    }
-    ?>
+    <a href="index.php?c=user&profile=1">Ver Perfil</a><br>
     <h1>✒️ FORO</h1>
     <?php
 
