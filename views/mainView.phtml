@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+
+    if ($_SESSION['user']) {
+        echo 'Hola ' . $_SESSION['user']->getUsername() . '. <a href="index.php?c=user&logout=1">Cerrar Sesión</a><br><br>';
+    }
+    ?>
+    <h1>✒️ FORO</h1>
+    <?php
+
+    foreach ($topics as $topic) {
+        if ($_SESSION["user"]->getRol()) {
+            echo " -<a href='index.php?c=topic&delete=" . $topic->getId() . "'>X</a> | ";
+        }
+        echo "<a href='index.php?c=topic&id=" . $topic->getId() . "'>" . $topic->getTitle() . "<br>";
+    }
+    ?>
+    <br>
+    <a href="index.php?c=topic&create=1">Crear Tema</a>
+</body>
+
+</html>

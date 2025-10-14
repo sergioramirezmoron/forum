@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+    if (!$topic) {
+        echo "<script>alert('INCORRECTO')</script>";
+    } else {
+        echo "<h1>" . $topic->getTitle() . "</h1>";
+        echo $topic->getDescription() . "<br>";
+        echo "Escrito por: <strong>" . $topic->getIdAuthor()->getUsername() . "</strong>  el <strong>" . date('d/m/Y', strtotime($topic->getDate())) . "</strong><br>";
+        echo "<br>";
+
+    ?>
+        <form method="POST" action="index.php?c=comment&id=<?php echo $_GET['id']; ?>">
+            <textarea name="content"></textarea>
+
+            <input type="submit" value="Enviar comentario" name="addComment">
+        </form>
+    <?php
+        echo "COMENTARIOS: <br>";
+
+        foreach ($comments as $comment) {
+            if ($_SESSION["user"]->getRol()) {
+                echo "<a href='index.php?c=comment&delete=" . $comment->getId() . "&post_id=" . $topic->getId() . "'>X</a> ";
+            }
+            echo $comment->getDate() . " - <strong>" . $comment->getIdAuthor()->getUsername() . "</strong>: " . $comment->getContent() . "<br>";
+        }
+    }
+
+    ?>
+    <a href="index.php">Volver</a><br>
+
+</body>
+
+</html>
