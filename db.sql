@@ -9,7 +9,8 @@ CREATE TABLE
         id INT (11) AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(30) NOT NULL,
         password VARCHAR(255) NOT NULL,
-        rol TINYINT (1) NOT NULL
+        rol TINYINT (1) NOT NULL,
+        avatar VARCHAR(255) NULL
     );
 
 CREATE TABLE

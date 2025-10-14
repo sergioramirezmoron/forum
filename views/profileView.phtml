@@ -13,6 +13,9 @@
     if ($_SESSION['user']) {
     ?>
         <h3>Nombre: <?php echo $_SESSION['user']->getUsername(); ?></h3>
+        <?php if ($_SESSION['user']->getAvatar()) { ?>
+            <img src="public/img/<?php echo $_SESSION['user']->getAvatar(); ?>" alt="avatar" style="max-width:150px;max-height:150px;border-radius: 50%;" />
+        <?php } ?>
         <h3>Rol: <?php if ($_SESSION['user']->getRol()) {
                     ?>
                 Admin

@@ -1,4 +1,5 @@
 <?php
+include_once("helpers/FileHelper.php");
 
 //Logout
 if (isset($_GET['logout'])) {
@@ -20,7 +21,15 @@ if (isset($_GET['register'])) {
 
 if (isset($_POST["registerSubmit"])) {
     if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password2'])) {
-        $userCreated = UserRepository::register($_POST["username"], $_POST["password"], $_POST["password2"]);
+        $avatarPath = null;
+        if (isset($_FILES['avatar']) && isset($_FILES['avatar']['tmp_name']) && $_FILES['avatar']) {
+            $tmp = $_FILES['avatar']['tmp_name'];
+            $name = $_FILES['avatar']['name'];
+            if (FileHelper::fileHandler($tmp, "public/img/".$name)) {
+                $avatarPath = $name;
+            }
+        }
+        $userCreated = UserRepository::register($_POST["username"], $_POST["password"], $_POST["password2"], $avatarPath);
         if ($userCreated) {
             require_once('views/loginView.phtml');
             header('Location: index.php?c=user');

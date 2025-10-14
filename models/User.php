@@ -7,14 +7,16 @@ class User
     private $username;
     private $password;
     private $rol;
+    private $avatar;
 
 
-    public function __construct($id, $username, $password, $rol)
+    public function __construct($id, $username, $password, $rol, $avatar = null)
     {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->rol = $rol;
+        $this->avatar = $avatar;
     }
 
     public function getId()
@@ -32,5 +34,9 @@ class User
     public function getRol()
     {
         return $this->rol;
+    }
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }

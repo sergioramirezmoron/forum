@@ -11,10 +11,11 @@
 <body>
     <h2>Registro de usuario</h2>
 
-    <form action="index.php?c=user" method="POST">
+    <form action="index.php?c=user" method="POST" enctype="multipart/form-data">
         <input type="text" name="username" placeholder="Nombre de usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <input type="password" name="password2" placeholder="Repetir contraseña" required>
+        <input type="file" name="avatar">
         <input type="submit" name="registerSubmit" value="Registrar">
     </form>
 
