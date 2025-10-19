@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Categoría</title>
+    <link rel="stylesheet" href="public/style.css">
+</head>
+<body>
+    <a href="index.php">← Volver al Foro</a>
+    
+    <h1>📁 Crear nueva Categoría</h1>
+    
+    <form action="index.php?c=category&create=1" method="POST">
+        <div>
+            <label for="name">Nombre de la categoría:</label>
+            <input type="text" name="name" id="name" placeholder="Nombre de la categoría" required>
+        </div>
+        
+        <div>
+            <label for="description">Descripción:</label>
+            <textarea name="description" id="description" placeholder="Descripción de la categoría" required></textarea>
+        </div>
+        
+        <input type="submit" name="addCategory" value="Crear Categoría">
+    </form>
+    
+</body>
+</html>

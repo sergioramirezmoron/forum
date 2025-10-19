@@ -4,38 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo htmlspecialchars($topic->getTitle()); ?></title>
     <link rel="stylesheet" href="public/style.css">
 </head>
 
 <body>
+    <a href="index.php">← Volver al Foro</a> | 
+    <a href="index.php?c=user&profile=1">Ver Perfil</a> | 
+    <a href="index.php?c=user&logout=1">Cerrar Sesión</a>
+
     <?php
     if (!$topic) {
-        echo "<script>alert('INCORRECTO')</script>";
+        echo "<h1>❌ Topic no encontrado</h1>";
+        echo "<p>El topic que buscas no existe o ha sido eliminado.</p>";
     } else {
-        echo "<h1>" . $topic->getTitle() . "</h1>";
-        echo $topic->getDescription() . "<br>";
-        echo "Escrito por: <strong>" . $topic->getIdAuthor()->getUsername() . "</strong>  el <strong>" . $topic->getDate() . "</strong><br>";
+        echo "<h1>📝 " . htmlspecialchars($topic->getTitle()) . "</h1>";
+        echo "<div class='topic-content'>";
+        echo "<p>" . nl2br(htmlspecialchars($topic->getDescription())) . "</p>";
+        echo "<small>Escrito por: <strong>" . htmlspecialchars($topic->getIdAuthor()->getUsername()) . "</strong> el <strong>" . $topic->getDate() . "</strong></small>";
+        echo "</div>";
         echo "<br>";
 
     ?>
+        <h2>💬 Comentar</h2>
         <form method="POST" action="index.php?c=comment&id=<?php echo $_GET['id']; ?>">
-            <textarea name="content"></textarea>
-
+            <textarea name="content" placeholder="Escribe tu comentario aquí..." required></textarea>
             <input type="submit" value="Enviar comentario" name="addComment">
-        </form><br>
-        <a href="index.php">Volver</a><br>
-    <?php
-        echo "COMENTARIOS: <br><br>";
-
-        foreach ($comments as $comment) {
-            if ($_SESSION["user"]->getRol() || $comment->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
-                echo "<a href='index.php?c=comment&delete=" . $comment->getId() . "&post_id=" . $topic->getId() . "'>X</a> ";
+        </form>
+        
+        <h2>💬 Comentarios</h2>
+        <?php
+        if (empty($comments)) {
+            echo "<p>No hay comentarios aún. ¡Sé el primero en comentar!</p>";
+        } else {
+            foreach ($comments as $comment) {
+                echo "<div class='comment-item'>";
+                if ($_SESSION["user"]->getRol() || $comment->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
+                    echo "<a href='index.php?c=comment&delete=" . $comment->getId() . "&post_id=" . $topic->getId() . "' class='delete-comment'>🗑️</a> ";
+                }
+                echo "<strong>" . htmlspecialchars($comment->getIdAuthor()->getUsername()) . "</strong> - <small>" . $comment->getDate() . "</small><br>";
+                echo "<p>" . nl2br(htmlspecialchars($comment->getContent())) . "</p>";
+                echo "</div><br>";
             }
-            echo $comment->getDate() . " - <strong>" . $comment->getIdAuthor()->getUsername() . "</strong>: " . $comment->getContent() . "<br>";
         }
     }
-
     ?>
 
 </body>

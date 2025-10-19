@@ -4,9 +4,11 @@
 require_once('models/User.php');
 require_once('models/Topic.php');
 require_once('models/Comment.php');
+require_once('models/Category.php');
 require_once('models/UserRepository.php');
 require_once('models/TopicRepository.php');
 require_once('models/CommentRepository.php');
+require_once('models/CategoryRepository.php');
 
 session_start();
 //consultas a la base de datos
@@ -25,6 +27,8 @@ if (isset($_GET['c'])) {
     if (!($_SESSION['user'])) {
         require_once('controllers/userController.php');
     } else {
-        require_once('controllers/topicController.php');
+        $categories = CategoryRepository::getCategories();
+        $topics = TopicRepository::getTopics();
+        require_once('views/mainView.phtml');
     }
 }

@@ -4,7 +4,7 @@ include_once("helpers/FileHelper.php");
 // Delete
 if (isset($_GET["delete"])) {
     $topicToDelete = TopicRepository::getTopicById($_GET["delete"]);
-    if ($topicToDelete && ($_SESSION["user"]->getRol()) || ($topicToDelete->getIdAuthor()->getId() == $_SESSION["user"]->getId())) {
+    if ($topicToDelete && (($_SESSION["user"]->getRol()) || ($topicToDelete->getIdAuthor()->getId() == $_SESSION["user"]->getId()))) {
         if (TopicRepository::deleteTopic($_GET["delete"])) {
             header("Location: index.php");
             exit();
@@ -18,8 +18,9 @@ if (isset($_GET["create"])) {
         $title = $_POST['title'];
         $content = $_POST['description'];
         $idAuthor = $_SESSION["user"]->getId();
+        $idCategory = isset($_POST['category']) ? $_POST['category'] : null;
 
-        $newId = TopicRepository::createTopic($title, $content, $idAuthor);
+        $newId = TopicRepository::createTopic($title, $content, $idAuthor, $idCategory);
         header("Location: index.php?c=topic&id=" . $newId);
         exit();
     }

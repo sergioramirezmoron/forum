@@ -14,13 +14,22 @@ CREATE TABLE
     );
 
 CREATE TABLE
+    categories (
+        id INT (11) AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(30) NOT NULL,
+        description TEXT NOT NULL
+    );
+
+CREATE TABLE
     topics (
         id INT (11) AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(100) NOT NULL,
         description TEXT NOT NULL,
         date DATETIME NOT NULL,
         id_author INT (11) NOT NULL,
-        FOREIGN KEY (id_author) REFERENCES users (id)
+        id_category INT (11),
+        FOREIGN KEY (id_author) REFERENCES users (id),
+        FOREIGN KEY (id_category) REFERENCES categories (id)
     );
 
 CREATE TABLE

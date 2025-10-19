@@ -9,20 +9,29 @@
 </head>
 
 <body>
-    <a href="index.php?c=user&profile=1">Ver Perfil</a> | <a href="index.php?c=user&logout=1">Cerrar Sesión</a>
-    
-    <h1>✒️ FORO</h1>
-    <?php
+    <a href='index.php?c=topic&create=1'>Crear nuevo topic</a> | <a href="index.php?c=user&profile=1">Ver Perfil</a> | <a href="index.php?c=user&logout=1">Cerrar Sesión</a>
 
-    foreach ($topics as $topic) {
-        if ($_SESSION["user"]->getRol() || $topic->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
-            echo "<a href='index.php?c=topic&delete=" . $topic->getId() . "'>X</a> | ";
+    <h1>✒️ FORO</h1>
+
+    <h2>📁 Categorías</h2>
+    <?php
+    if (isset($categories) && !empty($categories)) {
+        foreach ($categories as $category) {
+            echo "<div class='category-item'>";
+            echo "<h3><a href='index.php?c=category&id=" . $category->getId() . "'>" . $category->getName() . "</a></h3>";
+            echo "</div><br>";
         }
-        echo "<a href='index.php?c=topic&id=" . $topic->getId() . "'>" . $topic->getTitle() . "<br>";
+    } else {
+        echo "<p>No hay categorías disponibles.</p>";
+    }
+
+    if ($_SESSION["user"]->getRol()) {
+    ?>
+        <a href='index.php?c=category&create=1'>Crear Categoría</a>
+    <?php
     }
     ?>
     <br>
-    <a href="index.php?c=topic&create=1">Crear Tema</a>
 
 </body>
 

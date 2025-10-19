@@ -8,15 +8,17 @@ class Topic
     private $description;
     private $date;
     private $idAuthor;
+    private $idCategory;
 
 
-    public function __construct($id, $title, $description, $date, $idAuthor)
+    public function __construct($id, $title, $description, $date, $idAuthor, $idCategory)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->date = $date;
         $this->idAuthor = $idAuthor;
+        $this->idCategory = $idCategory;
     }
 
     public function getId()
@@ -38,6 +40,10 @@ class Topic
     public function getIdAuthor()
     {
         return UserRepository::getUserById($this->idAuthor);
+    }
+    public function getIdCategory()
+    {
+        return $this->idCategory;
     }
     public function getComments()
     {

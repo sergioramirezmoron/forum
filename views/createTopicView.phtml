@@ -4,18 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear Topic</title>
     <link rel="stylesheet" href="public/style.css">
 </head>
 
 <body>
+    <a href="index.php">← Volver al Foro</a>
+    
+    <h1>📝 Crear nuevo Topic</h1>
+    
     <form action="index.php?c=topic&create=1" method="POST">
-        <input type="text" name="title" placeholder="Título" required>
-        <textarea name="description">
-        </textarea>
-        <input type="submit" name="addPost" value="Crear tema">
+        <div>
+            <label for="title">Título:</label>
+            <input type="text" name="title" id="title" placeholder="Título del topic" required>
+        </div>
+        
+        <div>
+            <label for="category">Categoría:</label>
+            <select name="category" id="category">
+                <option value="">Sin categoría</option>
+                <?php
+                $categories = CategoryRepository::getCategories();
+                foreach ($categories as $category) {
+                    $selected = (isset($_GET['category']) && $_GET['category'] == $category->getId()) ? 'selected' : '';
+                    echo "<option value='" . $category->getId() . "' $selected>" . $category->getName() . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+        
+        <div>
+            <label for="description">Descripción:</label>
+            <textarea name="description" id="description" placeholder="Contenido del topic" required></textarea>
+        </div>
+        
+        <input type="submit" name="addPost" value="Crear Topic">
     </form>
-    <a href="index.php">Volver</a>
+    
 </body>
 
 </html>

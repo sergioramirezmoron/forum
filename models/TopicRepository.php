@@ -7,7 +7,7 @@ class TopicRepository
         $q = "SELECT * FROM topics WHERE id=" . $idPost;
         $result = $db->query($q);
         if ($row = $result->fetch_assoc()) {
-            return new Topic($row['id'], $row['title'], $row['description'], $row['date'], $row['id_author']);
+            return new Topic($row['id'], $row['title'], $row['description'], $row['date'], $row['id_author'], $row['id_category']);
         }
         return null;
     }
@@ -19,15 +19,15 @@ class TopicRepository
         $result = $db->query($q);
         $topics = array();
         while ($row = $result->fetch_assoc()) {
-            $topics[] = new Topic($row['id'], $row['title'], $row['description'], $row['date'], $row['id_author']);
+            $topics[] = new Topic($row['id'], $row['title'], $row['description'], $row['date'], $row['id_author'], $row['id_category']);
         }
         return $topics;
     }
 
-    public static function createTopic($title, $description, $idAuthor)
+    public static function createTopic($title, $description, $idAuthor, $idCategory = null)
     {
         $db = Connection::connect();
-        $query = "INSERT INTO topics (title, description, date, id_author) VALUES ('$title', '$description', NOW(), '$idAuthor')";
+        $query = "INSERT INTO topics (title, description, date, id_author, id_category) VALUES ('$title', '$description', NOW(), '$idAuthor', '$idCategory')";
         if ($result = $db->query($query)) {
             return $db->insert_id;
         }
@@ -42,5 +42,17 @@ class TopicRepository
             return true;
         }
         return false;
+    }
+
+    public static function getTopicsByCategory($categoryId)
+    {
+        $db = Connection::connect();
+        $q = "SELECT * FROM topics WHERE id_category = " . $categoryId . " ORDER BY date DESC";
+        $result = $db->query($q);
+        $topics = array();
+        while ($row = $result->fetch_assoc()) {
+            $topics[] = new Topic($row['id'], $row['title'], $row['description'], $row['date'], $row['id_author'], $row['id_category']);
+        }
+        return $topics;
     }
 }
