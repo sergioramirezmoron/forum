@@ -27,7 +27,7 @@
             echo "<div class='topic-item'>";
             echo "<h3>";
             if (isset($_SESSION["user"]) && ($_SESSION["user"]->getRol() || $topic->getIdAuthor()->getId() == $_SESSION["user"]->getId())) {
-                echo "<a href='index.php?c=topic&delete=" . $topic->getId() . "' class='delete-topic'>🗑️</a> ";
+                echo "<a href='index.php?c=topic&delete=" . $topic->getId() . "'>🗑️</a> ";
             }
             echo "<a href='index.php?c=topic&id=" . $topic->getId() . "'>" . $topic->getTitle() . "</a></h3>";
             echo "</div><br>";
