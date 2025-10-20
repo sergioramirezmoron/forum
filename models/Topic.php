@@ -9,6 +9,7 @@ class Topic
     private $date;
     private $idAuthor;
     private $idCategory;
+    private $comments = array();
 
 
     public function __construct($id, $title, $description, $date, $idAuthor, $idCategory)
@@ -19,6 +20,7 @@ class Topic
         $this->date = $date;
         $this->idAuthor = $idAuthor;
         $this->idCategory = $idCategory;
+        //$this->comments = CommentRepository::getCommentsByPostId($this->id);
     }
 
     public function getId()
@@ -47,6 +49,6 @@ class Topic
     }
     public function getComments()
     {
-        return CommentRepository::getCommentsByPostId($_GET["id"]);
+        return CommentRepository::getCommentsByPostId($this->id);
     }
 }

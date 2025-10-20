@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($topic->getTitle()); ?></title>
+    <title><?php echo $topic->getTitle(); ?></title>
     <link rel="stylesheet" href="public/style.css">
 </head>
 
@@ -18,10 +18,10 @@
         echo "<h1>❌ Topic no encontrado</h1>";
         echo "<p>El topic que buscas no existe o ha sido eliminado.</p>";
     } else {
-        echo "<h1>📝 " . htmlspecialchars($topic->getTitle()) . "</h1>";
+        echo "<h1>📝 " . $topic->getTitle() . "</h1>";
         echo "<div class='topic-content'>";
-        echo "<p>" . nl2br(htmlspecialchars($topic->getDescription())) . "</p>";
-        echo "<small>Escrito por: <strong>" . htmlspecialchars($topic->getIdAuthor()->getUsername()) . "</strong> el <strong>" . $topic->getDate() . "</strong></small>";
+        echo "<p>" . $topic->getDescription() . "</p>";
+        echo "<small>Escrito por: <strong>" . $topic->getIdAuthor()->getUsername() . "</strong> el <strong>" . $topic->getDate() . "</strong></small>";
         echo "</div>";
         echo "<br>";
 
@@ -42,8 +42,8 @@
                 if ($_SESSION["user"]->getRol() || $comment->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
                     echo "<a href='index.php?c=comment&delete=" . $comment->getId() . "&post_id=" . $topic->getId() . "' class='delete-comment'>🗑️</a> ";
                 }
-                echo "<strong>" . htmlspecialchars($comment->getIdAuthor()->getUsername()) . "</strong> - <small>" . $comment->getDate() . "</small><br>";
-                echo "<p>" . nl2br(htmlspecialchars($comment->getContent())) . "</p>";
+                echo "<strong>" . $comment->getIdAuthor()->getUsername() . "</strong> - <small>" . $comment->getDate() . "</small><br>";
+                echo "<p>" . $comment->getContent() . "</p>";
                 echo "</div><br>";
             }
         }
