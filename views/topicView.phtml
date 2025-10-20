@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <a href="index.php">← Volver al Foro</a> | 
-    <a href="index.php?c=user&profile=1">Ver Perfil</a> | 
+    <a href="index.php">← Volver al Foro</a> |
+    <a href="index.php?c=user&profile=1">Ver Perfil</a> |
     <a href="index.php?c=user&logout=1">Cerrar Sesión</a>
 
     <?php
@@ -31,9 +31,9 @@
             <textarea name="content" placeholder="Escribe tu comentario aquí..." required></textarea>
             <input type="submit" value="Enviar comentario" name="addComment">
         </form>
-        
+
         <h2>💬 Comentarios</h2>
-        <?php
+    <?php
         if (empty($comments)) {
             echo "<p>No hay comentarios aún. ¡Sé el primero en comentar!</p>";
         } else {
@@ -42,7 +42,7 @@
                 if ($_SESSION["user"]->getRol() || $comment->getIdAuthor()->getId() == $_SESSION["user"]->getId()) {
                     echo "<a href='index.php?c=comment&delete=" . $comment->getId() . "&post_id=" . $topic->getId() . "' class='delete-comment'>🗑️</a> ";
                 }
-                echo "<strong>" . $comment->getIdAuthor()->getUsername() . "</strong> - <small>" . $comment->getDate() . "</small><br>";
+                echo "<img src=public/img/" . $comment->getIdAuthor()->getAvatar() . " alt='Avatar' width='50px'><strong>" . $comment->getIdAuthor()->getUsername() . "</strong> - <small>" . $comment->getDate() . "</small><br>";
                 echo "<p>" . $comment->getContent() . "</p>";
                 echo "</div><br>";
             }
